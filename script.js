@@ -2,7 +2,6 @@ const addBtn = document.querySelector('.add');
 const saveBtn = document.querySelector('.save');
 const cancelBtn = document.querySelector('.cancel');
 const deleteBtns = document.getElementsByClassName('delete-note');
-
 const deleteAllBtn = document.querySelector('.delete-all');
 
 const noteArea = document.querySelector('.note-area');
@@ -41,8 +40,7 @@ const createNote = () => {
 
 	newNote.innerHTML = `<div class="note-header">
         <h3 class="note-title">${selectedValue}</h3>
-        <button class="delete-note" onclick='deleteNote(${cardID})'><i class="fas fa-times icon"></i></button>
-		 <button class="edit-note" onclick='editNote(${cardID})'><i class="fa-solid fa-pen-to-square"></i></button>
+        <button class="delete-note" onclick='deleteNote(${cardID})'><i class="fas fa-times icon"></i></button>	 
     </div>
     <div class="note-body">
     ${textarea.value}
@@ -77,9 +75,6 @@ const deleteNote = id => {
 	const noteToDelete = document.getElementById(id);
 	noteArea.removeChild(noteToDelete);
 };
-// const editNote = id => {
-// 	const noteToEdit = document.getElementById(id);
-// };
 
 const deleteAllNotes = () => {
 	noteArea.textContent = '';
