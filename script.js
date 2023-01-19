@@ -36,11 +36,13 @@ const addNote = () => {
 const createNote = () => {
 	const newNote = document.createElement('div');
 	newNote.classList.add('note');
+	newNote.classList.add('foldtl');
 	newNote.setAttribute('id', cardID);
 
 	newNote.innerHTML = `<div class="note-header">
         <h3 class="note-title">${selectedValue}</h3>
-        <button class="delete-note"><i class="fas fa-times icon"></i></button>
+        <button class="delete-note" onclick='deleteNote(${cardID})'><i class="fas fa-times icon"></i></button>
+		 <button class="edit-note" onclick='editNote(${cardID})'><i class="fa-solid fa-pen-to-square"></i></button>
     </div>
     <div class="note-body">
     ${textarea.value}
@@ -50,12 +52,39 @@ const createNote = () => {
 	cardID++;
 
 	closePanel();
+	checkColor(newNote);
 };
 
 const selectValue = () => {
 	selectedValue = category.options[category.selectedIndex].text;
 };
 
+const checkColor = note => {
+	switch (selectedValue) {
+		case 'Zakupy':
+			note.style.backgroundColor = 'rgb(72,255,0)';
+			break;
+		case 'Praca':
+			note.style.backgroundColor = 'rgb(255,243,0)';
+			break;
+		case 'Inne':
+			note.style.backgroundColor = 'rgb(0,170,255)';
+			break;
+	}
+};
+
+const deleteNote = id => {
+	const noteToDelete = document.getElementById(id);
+	noteArea.removeChild(noteToDelete);
+};
+// const editNote = id => {
+// 	const noteToEdit = document.getElementById(id);
+// };
+
+const deleteAllNotes = () => {
+	noteArea.textContent = '';
+};
 saveBtn.addEventListener('click', addNote);
 addBtn.addEventListener('click', openPanel);
 cancelBtn.addEventListener('click', closePanel);
+deleteAllBtn.addEventListener('click', deleteAllNotes);
